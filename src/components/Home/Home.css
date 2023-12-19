@@ -1,0 +1,19 @@
+.content-section {
+  background-color: #cae2ea;
+}
+
+.notificationbody {
+  padding: 5px;
+}
+
+.carousel-section {
+  background-color: #003366;
+}
+
+.carousel-item {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}

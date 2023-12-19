@@ -23,14 +23,9 @@ function Footer() {
       <div className="Bottom-footer">
         <div className="container-fluid col-xl-8 col-lg-10 col-md-12 col-sm-12 offset-xl-2 offset-lg-1">
           {/* Disclaimer */}
-          <p className="text-center disclaimer">
-            This site is designed, developed by D7B 04, 11, 16, 23, 67
-            <br />
-            content provided by National Scholarship Portal.
-          </p>
-          {/* Version Information */}
-          <p className="text-center disclaimer">
-            <strong>15-12-23 | Version 1.0</strong>
+          <p className="text-center disclaimer pt-3">
+          <strong>This site is re-designed & developed by Neelkanth Khithani, Vedang Gambhire, Kushl Alve, <br /> Atharva Hande, Shivam Choubey.<br />
+            <span style={{color: "goldenrod"}}>Vivekanand Education Society's Institute of Technology, Chembur. </span><br />Mini-Project Mentor Mrs. Lifna C. S.</strong>
           </p>
 
           {/* Logos */}
