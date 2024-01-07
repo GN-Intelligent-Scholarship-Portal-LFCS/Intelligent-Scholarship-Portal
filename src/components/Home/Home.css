@@ -1,5 +1,5 @@
 .content-section {
-  background-color: #cae2ea;
+  background-color: #fff;
 }
 
 .notificationbody {
@@ -17,3 +17,108 @@
   margin: 0;
   padding: 0;
 }
+
+/* -------Public Buttons CSS */
+.button-container {
+  padding: 20px;
+}
+
+.public-btn {
+  background-color: #003366;
+  padding: 10px;
+}
+
+.public-btn-link {
+  text-decoration: none;
+  color: #fff;
+  padding: 10px;
+}
+/* ------------------- */
+
+/* Boxes.css */
+
+.boxes-section {
+  display: flex;
+  background-color: #1f657c;
+  height: 260px;
+  justify-content: space-around;
+  padding: 0 10px;
+  gap: 40px;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  height: 220px;
+  width: 100%;
+  overflow: auto;
+  background-color: white;
+  margin-top: 20px;
+  border-bottom: 4px solid #007bff;
+}
+
+.box-heading {
+  font-family: sans-serif;
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  background-color: #007bff;
+  padding: 10px 4px;
+}
+
+.box-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: auto;
+  font-size: 14px;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  font-family: sans-serif;
+  font-weight: 500;
+  color: black;
+  padding: 8px;
+  cursor: pointer;
+}
+.bar-content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.bar-maximized{
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+  font-family: sans-serif;
+  font-weight: 500;
+  color: black;
+  padding: 8px;
+  cursor: pointer;
+}
+.list-links{
+  margin-top: 2px;
+  background-color: white;
+  padding: 0;
+  width: 100%;
+}
+
+.bar-maximized button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+.bar button {
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+

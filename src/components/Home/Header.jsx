@@ -3,7 +3,7 @@ import "./Header.css";
 import NIC from "../images/NIC.png";
 import G20 from "../images/G20.jpeg";
 import DI from "../images/DI.png";
-import { TextTitleItem, ImageTitleItem, ISPTitleItem, Announcement } from "./Header-Functions";
+import { TextTitleItem, ImageTitleItem, ISPTitleItem } from "./Header-Functions";
 
 function Header() {
   return (
@@ -46,9 +46,6 @@ function Header() {
           </div>
         </div>
       </div>
-
-      {/* Announcement Section */}
-      <Announcement />
     </header>
   );
 }

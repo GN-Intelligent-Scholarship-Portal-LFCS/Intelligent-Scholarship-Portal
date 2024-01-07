@@ -1,14 +1,18 @@
-import React from "react";
-import Header from "../components/Header/Header";
-import Home from "../components/Home/Home";
-import Footer from "../components/Footer/Footer";
+import React, { useState } from "react";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Home/Home";
+import RegistrationGuidelines from "./Home/NewRegistrationPage";
+import ApplicantRegistration from "./Home/ApplicantRegistration";
 
 function App() {
-    return (<div>
-    <Header />
-    <Home />
-    <Footer />
-    </div>);
+    
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} /> 
+            <Route path="/registration" element={<RegistrationGuidelines />} />
+            <Route path="/applicant-registration" element={<ApplicantRegistration />} />
+        </Routes>
+    );
 }
 
 export default App;
