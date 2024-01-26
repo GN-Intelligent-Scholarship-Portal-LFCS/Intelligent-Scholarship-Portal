@@ -1,14 +1,21 @@
 import React from "react";
-import Header from "../components/Header/Header";
-import Home from "../components/Home/Home";
-import Footer from "../components/Footer/Footer";
+import { Route, Routes } from "react-router-dom";
+import Home from "./Home/Home";
+import {StudentRegistrationGuidelines, OrganizationRegistrationGuidelines} from "./Scholarship/NewRegistrationPage";
+import StudentRegistration from "../components/Scholarship/StudentRegistration";
+import OrganizationRegistration from "./Scholarship/OrganizationRegistration";
 
 function App() {
-    return (<div>
-    <Header />
-    <Home />
-    <Footer />
-    </div>);
+    
+    return (
+        <Routes>
+            <Route path="/" element={<Home />} /> 
+            <Route path="/registration-student" element={<StudentRegistrationGuidelines />} />
+            <Route path="/student-registration" element={<StudentRegistration />} />
+            <Route path="/registration-organization" element={<OrganizationRegistrationGuidelines />} />
+            <Route path="/organization-registration" element={<OrganizationRegistration />} />
+        </Routes>
+    );
 }
 
 export default App;

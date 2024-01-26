@@ -23,21 +23,16 @@ function Footer() {
       <div className="Bottom-footer">
         <div className="container-fluid col-xl-8 col-lg-10 col-md-12 col-sm-12 offset-xl-2 offset-lg-1">
           {/* Disclaimer */}
-          <p className="text-center disclaimer">
-            This site is designed, developed by D7B 04, 11, 16, 23, 67
-            <br />
-            content provided by National Scholarship Portal.
-          </p>
-          {/* Version Information */}
-          <p className="text-center disclaimer">
-            <strong>15-12-23 | Version 1.0</strong>
+          <p className="text-center disclaimer pt-3">
+          <strong>This site is re-designed & developed by Neelkanth Khithani, Vedang Gambhire, Kushl Alve, <br /> Atharva Hande, Shivam Choubey.<br />
+            <span style={{color: "goldenrod"}}>Vivekanand Education Society's Institute of Technology, Chembur. </span><br />Mini-Project Mentor Mrs. Lifna C. S.</strong>
           </p>
 
           {/* Logos */}
           <div className="row justify-content-around">
             {logos.map((logo, index) => (
               <div key={index} className="col-xl-2 col-lg-2 col-md-3 col-sm-4">
-                <a href={logo.link} target="_blank">
+                <a href={logo.link} >
                   <img
                     src={logo.src}
                     alt={logo.alt}
@@ -50,7 +45,7 @@ function Footer() {
 
             {/* Google Play Logo */}
             <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center">
-              <a href="https://play.google.com/store/apps/details?id=in.gov.scholarships" target="_blank">
+              <a href="https://play.google.com/store/apps/details?id=in.gov.scholarships" >
                 <img
                   src={googlePlay}
                   className="img-fluid mx-auto"

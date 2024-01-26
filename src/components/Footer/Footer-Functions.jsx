@@ -1,4 +1,3 @@
-import React from "react";
 import indiaGov from "../images/indiaGov.png";
 import meity from "../images/meity.png";
 import nic_1 from "../images/nic_1.png";
