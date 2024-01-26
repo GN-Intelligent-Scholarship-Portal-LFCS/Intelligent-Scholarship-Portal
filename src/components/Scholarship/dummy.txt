@@ -1,0 +1,323 @@
+import React from "react";
+import { useState, useEffect } from "react";
+import Header from "../Header/Header";
+
+function StudentRegistrationForm() {
+    const [aadhaarNumber, setAadhaarNumber] = useState("");
+    const [otp, setOtp] = useState("");
+    const [enteredOtp, setEnteredOtp] = useState("");
+    const [otpSent, setOtpSent] = useState(false);
+    const [resendTimer, setResendTimer] = useState(10);
+    const [aadhaarVerified, setAadhaarVerified] = useState(false);
+
+    const handleAadhaarChange = (e) => {
+        setAadhaarNumber(e.target.value);
+    };
+
+    const verifyAadhaar = () => {
+        // Perform Aadhaar verification logic here (you may call an API, for example)
+        // For now, let's consider it as valid if it's a 12-digit number
+        const isValidAadhaar = /^\d{12}$/.test(aadhaarNumber);
+
+
+        if (isValidAadhaar) {
+            setAadhaarVerified(true);
+        } else {
+            alert("Invalid Aadhaar number. Please enter a valid 12-digit Aadhaar number.");
+        }
+    };
+
+    const generateOTP = () => {
+        if (aadhaarVerified) {
+            // Generate a random 6-digit OTP
+            const newOtp = Math.floor(100000 + Math.random() * 900000);
+            setOtp(newOtp.toString());
+            setOtpSent(true);
+
+            // Display OTP in an alert
+            alert(`Your OTP: ${newOtp}`);
+
+            // Start the resend timer
+            setResendTimer(10);
+
+            // Set a timer to reset otpSent after 10 seconds
+            setTimeout(() => {
+                setOtpSent(false);
+            }, 10000);
+        } else {
+            alert("Please verify your Aadhaar number first.");
+        }
+    };
+
+    const handleEnteredOtpChange = (e) => {
+        setEnteredOtp(e.target.value);
+    };
+
+    useEffect(() => {
+        let interval;
+        if (otpSent && resendTimer > 0) {
+            interval = setInterval(() => {
+                setResendTimer((prevTimer) => prevTimer - 1);
+            }, 1000);
+        }
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [otpSent, resendTimer]);
+
+    return (
+        <div>
+            <Header />
+            <div className="container card-form shadow mt-4 p-4">
+                <div className="card-body bg-white">
+                    <div className="form-group">
+                        <h4 style={{ textDecoration: "underline" }}>Enter the Details below:</h4>
+                        <label htmlFor="enteredAadhaarCardNo" className="mb-3">
+                            Enter your registered Aadhaar number:
+                        </label>
+                        <input
+                            autoComplete="off"
+                            type="text"
+                            className="form-control form-control-md"
+                            placeholder="Aadhaar card no."
+                            value={aadhaarNumber}
+                            onChange={handleAadhaarChange}
+                            disabled={aadhaarVerified}
+                        />
+                        {!aadhaarVerified && (
+                            <button
+                                className="btn btn-primary mb-3 mt-3"
+                                onClick={verifyAadhaar}
+                            >
+                                Verify Aadhaar
+                            </button>
+                        )}
+
+                        <hr />
+                        {aadhaarVerified && (
+                            <>
+                                <label htmlFor="enteredMobileNo" className="mt-3 mb-3">
+                                    Enter your mobile no.
+                                </label>
+                                <input
+                                    autoComplete="off"
+                                    type="text"
+                                    className="form-control form-control-md"
+                                    placeholder="Mobile no."
+                                />
+                            </>
+                        )}
+                    </div>
+
+                    <button
+                        className="btn btn-primary mb-3 mt-3"
+                        onClick={generateOTP}
+                        disabled={otpSent || !aadhaarVerified}
+                    >
+                        {otpSent ? `Resend OTP in ${resendTimer}s` : "Send OTP"}
+                    </button>
+
+                    <div className="form-group">
+                        <label htmlFor="enteredOtp" className="mb-3">
+                            Enter OTP:
+                        </label>
+                        <input
+                            autoComplete="off"
+                            type="text"
+                            className="form-control form-control-md"
+                            id="enteredOtp"
+                            value={enteredOtp}
+                            onChange={handleEnteredOtpChange}
+                        />
+                    </div>
+                    <button
+                        className="btn btn-primary mb-3 mt-3"
+                        style={{ backgroundColor: "green", border: "1px solid green" }}
+                    >
+                        Proceed to Registration...
+                    </button>
+                </div>
+            </div>
+        </div>);
+}
+
+export default StudentRegistrationForm;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+const [aadhaarNumber, setAadhaarNumber] = useState("");
+    const [otp, setOtp] = useState("");
+    const [enteredOtp, setEnteredOtp] = useState("");
+    const [otpSent, setOtpSent] = useState(false);
+    const [resendTimer, setResendTimer] = useState(10);
+    const [aadhaarVerified, setAadhaarVerified] = useState(false);
+
+    const handleAadhaarChange = (e) => {
+        setAadhaarNumber(e.target.value);
+    };
+
+    const verifyAadhaar = () => {
+        // Perform Aadhaar verification logic here (you may call an API, for example)
+        // For now, let's consider it as valid if it's a 12-digit number
+        const isValidAadhaar = /^\d{12}$/.test(aadhaarNumber);
+
+        if (isValidAadhaar) {
+            setAadhaarVerified(true);
+        } else {
+            alert("Invalid Aadhaar number. Please enter a valid 12-digit Aadhaar number.");
+        }
+    };
+
+    const generateOTP = () => {
+        if (aadhaarVerified) {
+            // Generate a random 6-digit OTP
+            const newOtp = Math.floor(100000 + Math.random() * 900000);
+            setOtp(newOtp.toString());
+            setOtpSent(true);
+
+            // Display OTP in an alert
+            alert(`Your OTP: ${newOtp}`);
+
+            // Start the resend timer
+            setResendTimer(10);
+
+            // Set a timer to reset otpSent after 10 seconds
+            setTimeout(() => {
+                setOtpSent(false);
+            }, 10000);
+        } else {
+            alert("Please verify your Aadhaar number first.");
+        }
+    };
+
+    const handleEnteredOtpChange = (e) => {
+        setEnteredOtp(e.target.value);
+    };
+
+    useEffect(() => {
+        let interval;
+        if (otpSent && resendTimer > 0) {
+            interval = setInterval(() => {
+                setResendTimer((prevTimer) => prevTimer - 1);
+            }, 1000);
+        }
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, [otpSent, resendTimer]);
+
+    return (
+        <div>
+            <Header />
+            <div className="container card-form shadow mt-4 p-4">
+                <div className="card-body bg-white">
+                    <div className="form-group">
+                        <h4 style={{ textDecoration: "underline" }}>Enter the Details below:</h4>
+                        <label htmlFor="enteredAadhaarCardNo" className="mb-3">
+                            Enter your registered Aadhaar number:
+                        </label>
+                        <input
+                            autoComplete="off"
+                            type="text"
+                            className="form-control form-control-md"
+                            placeholder="Aadhaar card no."
+                            value={aadhaarNumber}
+                            onChange={handleAadhaarChange}
+                            disabled={aadhaarVerified}
+                        />
+                        {!aadhaarVerified && (
+                            <button
+                                className="btn btn-primary mb-3 mt-3"
+                                onClick={verifyAadhaar}
+                            >
+                                Verify Aadhaar
+                            </button>
+                        )}
+
+                        <hr />
+                        {aadhaarVerified && (
+                            <>
+                                <label htmlFor="enteredMobileNo" className="mt-3 mb-3">
+                                    Enter your mobile no.
+                                </label>
+                                <input
+                                    autoComplete="off"
+                                    type="text"
+                                    className="form-control form-control-md"
+                                    placeholder="Mobile no."
+                                />
+                            </>
+                        )}
+                    </div>
+
+                    <button
+                        className="btn btn-primary mb-3 mt-3"
+                        onClick={generateOTP}
+                        disabled={otpSent || !aadhaarVerified}
+                    >
+                        {otpSent ? `Resend OTP in ${resendTimer}s` : "Send OTP"}
+                    </button>
+
+                    <div className="form-group">
+                        <label htmlFor="enteredOtp" className="mb-3">
+                            Enter OTP:
+                        </label>
+                        <input
+                            autoComplete="off"
+                            type="text"
+                            className="form-control form-control-md"
+                            id="enteredOtp"
+                            value={enteredOtp}
+                            onChange={handleEnteredOtpChange}
+                        />
+                    </div>
+                    <button
+                        className="btn btn-primary mb-3 mt-3"
+                        style={{ backgroundColor: "green", border: "1px solid green" }}
+                    >
+                        Proceed to Registration...
+                    </button>
+                </div>
+            </div>
+        </div>
+
+*/
+
+
+/*<div className="container card-form shadow mt-4 p-4" style={{ fontFamily: 'Cambria, serif' }}>
+        <div className="card-body bg-white">
+            <p className="text-center themeFontcolor" style={{ fontSize: "20px", backgroundColor: "#115a87", color: "#fff", padding: "20px" }}>
+                <strong>Intelligent Scholarship Portal 2023-24 - Student Registration</strong>
+            </p>
+            <hr />
+            <h6 className="text-justify text-danger">
+                <strong>* Please fill all the details carefully.</strong>
+            </h6>
+            <form>
+                <label imp>Aadhaar Card Number</label>{" "}
+                <input type="text" />
+                <br />
+                <button
+                                className="btn btn-primary mb-3 mt-3"
+                                
+                            >
+                                Verify Aadhaar
+                            </button>
+            </form>
+        </div>
+    </div> 
+*/

@@ -3,7 +3,7 @@ import noticeBoardsData from "./NoticeBoardData";
 
 function NoticeBoardHeader({ headingText }) {
   return (
-    <div className="card-header notificationbg bg-primary text-white notification text-center" style={{fontWeight: "500"}}>
+    <div className="notification-bg bg-primary text-white notification text-center" style={{fontWeight: "500", padding: "5px", }}>
       Notice Board - For {headingText}
     </div>
   );
@@ -28,7 +28,7 @@ function NoticeBoard({ headingText, data }) {
       <div className="noticeBoard">
         <div className="card mb-2">
           <NoticeBoardHeader headingText={headingText} />
-          <div className="card-body notificationbody border border-primary">
+          <div className="card-body notification-body border border-primary">
             <marquee behavior="scroll" scrollamount="3" direction="up" loop="infinite" height="150px">
               <ul className="notificationlist list-unstyled text-justify">
                 {data[0].text.map((paragraph, index) => (

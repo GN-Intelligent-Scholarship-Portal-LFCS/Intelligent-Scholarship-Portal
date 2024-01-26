@@ -2,7 +2,7 @@
   background-color: #fff;
 }
 
-.notificationbody {
+.notification-body {
   padding: 5px;
 }
 
@@ -18,107 +18,108 @@
   padding: 0;
 }
 
-/* -------Public Buttons CSS */
-.button-container {
-  padding: 20px;
-}
-
-.public-btn {
-  background-color: #003366;
-  padding: 10px;
-}
-
-.public-btn-link {
-  text-decoration: none;
-  color: #fff;
-  padding: 10px;
-}
-/* ------------------- */
-
-/* Boxes.css */
-
-.boxes-section {
+/*  */
+/* --------------------------- */
+.tab-list {
   display: flex;
-  background-color: #1f657c;
-  height: 260px;
-  justify-content: space-around;
-  padding: 0 10px;
-  gap: 40px;
-}
-
-.box {
-  display: flex;
-  flex-direction: column;
-  height: 220px;
-  width: 100%;
-  overflow: auto;
-  background-color: white;
-  margin-top: 20px;
-  border-bottom: 4px solid #007bff;
-}
-
-.box-heading {
-  font-family: sans-serif;
-  color: white;
-  font-weight: 500;
-  font-size: 14px;
-  background-color: #007bff;
-  padding: 10px 4px;
-}
-
-.box-content {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: auto;
-  font-size: 14px;
-}
-
-.bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-  font-family: sans-serif;
-  font-weight: 500;
-  color: black;
-  padding: 8px;
-  cursor: pointer;
-}
-.bar-content {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-}
-.bar-maximized{
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.03);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
-  font-family: sans-serif;
-  font-weight: 500;
-  color: black;
-  padding: 8px;
-  cursor: pointer;
-}
-.list-links{
-  margin-top: 2px;
-  background-color: white;
+  list-style-type: none;
   padding: 0;
+}
+
+.tab-item {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: none;
+  background-color: grey;
+  color: white;
+  margin-right: 2px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.tab-item.active {
+  background-color: blue;
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.tab-content {
+  border: 1px solid #ddd;
+  border-top: none;
+}
+
+/* Styles for the table within the card */
+.table {
   width: 100%;
+  border-collapse: collapse;
 }
 
-.bar-maximized button {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-}
-.bar button {
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
 }
 
+.table th {
+  background-color: #f2f2f2;
+}
+
+.expandable-card {
+  border: 1px solid #ddd;
+}
+
+.card-header {
+  padding: 10px;
+  background-color: #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #0350dd;
+  font-weight: 600;
+  padding: 0px 10px 0px 10px;
+  font-size: 15px;
+}
+
+.card-body {
+  padding: 10px;
+  background-color: #fff;
+}
+
+.tab-header {
+  display: flex;
+}
+
+.tab-header button {
+  padding: 8px;
+  border: 1px solid #fff;
+  background-color: grey;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.tab-header button:focus {
+  outline: none;
+}
+
+.tab-header button.active {
+  background-color: white;
+  border-bottom: 1px solid white;
+}
+
+.tab-header button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #fff;
+}
+
+.dropdownTable {
+  border: 1px solid black;
+}
+
+.expand-symbol {
+  font-size: 25px;
+}
