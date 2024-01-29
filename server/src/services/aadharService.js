@@ -35,9 +35,13 @@ const verifyAadhar = async (req, res) => {
         const aadharVerificationResult = await db.query(`SELECT * FROM aadhar_details WHERE aadhar_no=${aadharNumber}`);
 
         if (aadharVerificationResult.rows.length === 0) {
-            return res.status(404).json({ message: "Aadhar number not verified." });
+            return res.status(404).json({
+                status : "success", 
+                message: "Aadhar number not verified." });
         } else {
-            return res.status(200).json({ message: "Aadhar verified successfully!" });
+            return res.status(200).json({ 
+                status : "failure",
+                message: "Aadhar verified successfully!" });
         }
     } catch (error) {
         console.error("Error verifying aadhar: ", error);
@@ -45,4 +49,4 @@ const verifyAadhar = async (req, res) => {
     }
 }
 
-export {verifyAadhar, fetchAadharDetails };
+export { verifyAadhar, fetchAadharDetails };
