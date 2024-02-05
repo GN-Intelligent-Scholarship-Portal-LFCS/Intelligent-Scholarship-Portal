@@ -28,4 +28,29 @@ const registerStudent = async (req, res) => {
     }
 }
 
-export default registerStudent;
+//Login for student:
+
+const loginStudent = async (req,res) => {
+    try {
+        const { aadharNumber } = req.body;
+        console.log(`Aadhar number trying to login : ${aadharNumber}`);
+
+        const result = db.query(`SELECT * FROM students WHERE aadhar_no=${aadharNumber}`);
+        console.log(result.rows);
+
+        if (result.rows.length === 0) {
+            res.status(404).json({
+                status : "success",
+                message: "Aadhar not registered."});
+        } else {
+            res.status(200).json({ 
+                status: "failure",
+                message: "Aadhar verified successfully."});
+        }
+    } catch(error) {
+        console.error("Error logging in: ",error);
+        res.status(500).json({ error: "Internal server error." });
+    }
+}
+
+export { registerStudent, loginStudent };

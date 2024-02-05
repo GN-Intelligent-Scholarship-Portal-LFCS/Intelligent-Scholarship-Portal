@@ -1,60 +1,87 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 const StudentLoginForm = () => {
 
     const navigate = useNavigate();
-    const { aadharNumber } = useParams();
 
-    const [educationDetails, setEducationDetails] = React.useState({
-        aadharNumber : "",
-    });
+    const [aadharNumber,setAadharNumber] = useState("");
+    const [verificationMessage,setVerificationMessage] = useState("");
+    const [phoneNumber, setPhoneNumber] = useState("");
+    const [userEnteredOTP, setUserEnteredOTP] = useState("");
+    const [message, setMessage] = React.useState(null);
 
-
-    const handleInputChange = (e) => {
-
-        const { name, value } = e.target;
-        setEducationDetails({
-            ...educationDetails,
-            [name]: value,
-        });
-    };
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        console.log(educationDetails);
-
+    const handleVerifyAadhar = async () => {
         try {
-            const response = await axios.post(`http://localhost:5000/student/api/register-student/${aadharNumber}`, educationDetails);
-            console.log(response.data);
-            alert(response.data.message);
+          const response = await axios.post('http://localhost:5000/student/api/check-registered-student', { aadharNumber: aadharNumber });
+          // Assuming backend sends a message property in the response
+          if(response.data.status == "success") {
+              setVerificationMessage(response.data.message);
+          }
+          else {
+              setVerificationMessage(response.data.message);
+          }
+        } catch (error) {
+          alert("Aadhar number not verified!");
+          console.error('Error verifying Aadhar:', error);
         }
-        catch (err) {
-            console.log(err);
+      };
+
+      const handleSendOtp = async (e) => {
+        e.preventDefault();
+        try {
+          const response = await axios.post('http://localhost:5000/aadhar/api/send-otp', {
+            phoneNumber : phoneNumber
+          });
+          
+          const responseOTP = response.data.otp;
+          const responseOTPMessage = response.data.message;
+          // Assuming backend sends an otp property in the response
+          console.log(responseOTP);
+          alert(responseOTPMessage);
+        } catch (error) {
+          console.error('Error sending OTP:', error);
         }
+      };
+  
+      const handleVerifyOtp = async (e) => {
+        e.preventDefault();
+        try {
+          const response = await axios.post('http://localhost:5000/aadhar/api/verify-otp', {
+              phoneNumber : phoneNumber,
+              userEnteredOTP : userEnteredOTP,
+          });
+          
+          console.log(response.data);
+          if (response.data.status == "success") {
+            setMessage(response.data.message);
+          } else {
+            setMessage(response.data.message);
+          }
+        } catch (error) {
+          console.error("Error verifying OTP: ", error);
+        }
+      };
 
-
-        setEducationDetails({
-            aadharNumber: "",
-            instName: "",
-            degree: "",
-            startDate: "",
-            graduationDate: "",
-            currentYear: ""
-        })
-
-        navigate("/")
+    const handleLogin = async (e) => {
+        e.preventDefault();
+  
+        try {
+          console.log('Aadhar Number:', aadharNumber);
+          navigate(`/student-registration-form/${aadharNumber}`);
+      } catch (error) {
+          console.error('Error logging in:', error);
+      }
     };
 
     return (
 
-        <div className="bg-gray-100 h-full flex items-center justify-center p-10">
-            <div className="bg-white p-8 rounded shadow-md max-w-md w-full">
-                <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+            <div>
+                <form className="space-y-4">
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="schemeName">
+                        <label className="text-sm font-bold mb-2" htmlFor="schemeName">
                             Aadhar Number:
                         </label>
                         <input
@@ -62,89 +89,43 @@ const StudentLoginForm = () => {
                             id="aadharNumber"
                             type="number"
                             name="aadharNumber"
-                            readOnly
-                            style={{ backgroundColor: '#f0f0f0', color: '#333' }}
-                            value={educationDetails.aadharNumber}
-                            onChange={handleInputChange}
-                            placeholder={educationDetails.aadharNumber}
+                            value={aadharNumber}
+                            onChange={(e) => setAadharNumber(e.target.value)}
+                            placeholder={aadharNumber}
                         />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="startDate">
-                            Institute Name:
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="instName"
-                            type="text"
-                            name="instName"
-                            value={educationDetails.instName}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="endDate">
-                            Enter Name of your degree:
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="degree"
-                            type="text"
-                            name="degree"
-                            value={educationDetails.degree}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="income">
-                            Start Date of your degree:
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="startDate"
-                            type="date"
-                            name="startDate"
-                            value={educationDetails.startDate}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="guidelines">
-                            Graduation Date of your degree:
-                        </label>
-                        <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="graduationDate"
-                            type="date"
-                            name="graduationDate"
-                            value={educationDetails.graduationDate}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className="mb-4">
-                    <label htmlFor="graduationYear">Current Year of your degree:</label>
-                        <select
-                          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          id="graduationYear"
-                          name="graduationYear"
-                          value={educationDetails.graduationYear}
-                          onChange={handleInputChange}
-                        >
-                          <option value="2018">First</option>
-                          <option value="2019">Second</option>
-                          <option value="2020">Third</option>
-                          <option value="2021">Fourth</option>
-                          <option value="2022">Fifth</option>
-                        </select>
-                    </div>
-                    <div className="flex items-center justify-center">
-                        <button
-                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            onSubmit={handleSubmit}
-                        >
-                            Register to ISP
-                        </button>
-                        {}
+                        <button type="button" onClick={handleVerifyAadhar}>Verify Aadhar</button>
+  
+                        {verificationMessage && <p>{verificationMessage}</p>}
+
+                        {verificationMessage.includes("successfully") && (
+                            <div>
+                              <label>
+                                Mobile Number:
+                                <input type="text" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                              </label>
+                              <button onClick={handleSendOtp}>Send OTP</button>
+                            </div>
+                        )}
+
+                        {verificationMessage.includes("successfully") && (
+                                  <div>
+                                    <label>
+                                      Enter OTP:
+                                      <input
+                                          type="number"
+                                          value={userEnteredOTP}
+                                          onChange={(e) => setUserEnteredOTP(e.target.value)}
+                                      />
+                                    </label>
+                                    <button onClick={handleVerifyOtp}>Verify OTP</button>
+                                  </div>
+                        )}
+                        {message && <p className={message.includes('successfully') ? "text-green-500" : "text-red-500"}> {message}</p>}
+                        {message && message.includes("successfully") && (
+                            <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2' onClick={handleLogin}>
+                                Login 
+                            </button>
+                        )}
                     </div>
                 </form>
             </div>
