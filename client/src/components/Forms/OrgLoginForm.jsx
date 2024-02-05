@@ -1,7 +1,9 @@
 import React from 'react';
 import axios from "axios";
 import { useNavigate, useParams } from 'react-router-dom';
-const OrgLogin = () => {
+import "./FormStyle.css";
+
+const OrgLoginForm = () => {
 
     const navigate = useNavigate();
 
@@ -123,4 +125,4 @@ const OrgLogin = () => {
     );
 };
 
-export default OrgLogin;
+export default OrgLoginForm;

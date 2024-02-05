@@ -3,10 +3,10 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Home/Home";
 import { StudentRegistrationGuidelines, OrganizationRegistrationGuidelines } from "./Pages/NewRegistrationPage";
 import AadharStudentRegistration from "./Pages/AadharStudentRegistrationPage";
-import OrgRegistration from "./Pages/OrganizationRegistration";
-import OrgLogin from "./Pages/OrganisationLogin";
+import OrgLogin from "./Forms/OrgLoginForm";
 import OrgScholarshipForm from "./Pages/OrgScholarshipForm";
 import StudentRegistration from "./Pages/StudentRegistrationPage";
+import OrgRegistration from "./Pages/OrgRegistrationPage";
 import StudentLogin from "./Pages/StudentLoginPage";
 
 function App() {

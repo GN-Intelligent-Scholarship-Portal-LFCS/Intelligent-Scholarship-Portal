@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
+import "./FormStyle.css";
 
-const OrgRegistration = () => {
+const OrgRegistrationForm = () => {
 
     const navigate = useNavigate();
 
@@ -54,7 +55,6 @@ const OrgRegistration = () => {
     return (
         <div className="bg-gray-100 h-screen flex items-center justify-center">
             <div className="bg-white p-8 rounded shadow-md w-96">
-                <h2 className="text-2xl font-bold mb-4">Register with ISP</h2>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="TanNo">
@@ -90,4 +90,4 @@ const OrgRegistration = () => {
     );
 };
 
-export default OrgRegistration;
+export default OrgRegistrationForm;

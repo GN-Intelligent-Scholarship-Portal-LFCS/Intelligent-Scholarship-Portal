@@ -9,8 +9,13 @@ const cardData = [
     {
       title: "Student Corner",
       accordions: [
-        { id: "1", heading: "Login", content: <Link style={{textDecoration: "none", color: "black"}} to="/registration-student">Registration</Link> },
-        { id: "2", heading: "Scheme Information", 
+        { id: "1", heading: "Login/SignUp", 
+          content:  <div>
+                      <Link style={{textDecoration: "none", color: "black"}} to="/registration-student">Sign Up</Link>
+                      <br />
+                      <Link style={{textDecoration: "none", color: "black"}} to="/student-login/:aadharNumber">Login</Link>
+                    </div> },
+        { id: "2", heading: "Help", 
         content: <div>
         <ul style={{listStyle: "none", padding: "0px"}}>
         
@@ -19,10 +24,15 @@ const cardData = [
       ],
     },
     {
-      title: "Private Organization Corner",
+      title: "Organization Corner",
       accordions: [
-        { id: "3", heading: "Link 3", content: <Link to="/link3">Link 3</Link> },
-        { id: "4", heading: "Link 4", content: <Link to="/link4">Link 4</Link> },
+        { id: "3", heading: "Login/SignUp", 
+          content:  <div>
+                      <Link style={{textDecoration: "none", color: "black"}} to="/organization-registration">Sign Up</Link>
+                      <br />
+                      <Link style={{textDecoration: "none", color: "black"}} to="/organisation-login/:tanNumber">Login</Link>
+                    </div> },
+        { id: "4", heading: "Help", content: <Link to="/link4">Help</Link> },
       ],
     },
     {
