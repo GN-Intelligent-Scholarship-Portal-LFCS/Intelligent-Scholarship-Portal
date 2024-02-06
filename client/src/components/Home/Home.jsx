@@ -4,9 +4,10 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import ImageCarousel from "./CarouselComponent";
 import { Announcement } from "../Header/Header-Functions"
-import BoxComponent from "./BoxComponent";
+// import BoxComponent from "./BoxComponent";
 import AnnouncementNotice from "./NoticeBoardComponent";
 import ScholarshipTableComponent from "./ScholarshipTableComponent";
+import Boxes from "./BoxComponentVedang";
 
 function Home() {
     return (
@@ -14,7 +15,8 @@ function Home() {
             <Header />
             <Announcement />
             <ImageCarousel />
-            <BoxComponent />
+            {/* <BoxComponent /> */}
+            <Boxes />
 
             {/* Space for BoxComponent */}
 
