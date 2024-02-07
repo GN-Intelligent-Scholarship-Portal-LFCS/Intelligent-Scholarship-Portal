@@ -41,9 +41,9 @@ const OrgRegistrationForm = () => {
             } else if (responseData.success == false) {
                 //Case 2: Organisation already registered.
                 setMessage(responseData.message);
-            } else {
+            } else if (responseData.success == "error") {
                 //Case 3: Organisation does not exist(Invalid TAN number).
-                setMessage("Invalid TAN number!");
+                setMessage(responseData.message);
             }
 
         } catch (error) {
@@ -55,7 +55,7 @@ const OrgRegistrationForm = () => {
     return (
         <div className="bg-gray-100 h-screen flex items-center justify-center">
             <div className="bg-white p-8 rounded shadow-md w-96">
-                <form onSubmit={handleSubmit}>
+                <form>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="TanNo">
                             Enter Tan no:
@@ -73,7 +73,7 @@ const OrgRegistrationForm = () => {
                     <div className="flex items-center justify-between">
                         <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type='submit'
+                            onClick={handleSubmit}
                         >
                             Register
                         </button>

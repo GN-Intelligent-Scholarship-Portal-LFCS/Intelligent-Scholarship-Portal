@@ -9,6 +9,9 @@ scholarshipRoute.use(express.json());
 //Endpoint for verifying TAN number and registering the organisation.
 scholarshipRoute.post("/api/register-organisation/:tanNumber", schemeAPI.registerOrganisation);
 
+//Endpoint for only verifying TAN number:
+scholarshipRoute.post("/api/verify-tan-number", schemeAPI.verifyTANNumber);
+
 //Endpoint for sending OTP:
 scholarshipRoute.post("/api/send-otp", otpAPI.sendOTP);
 

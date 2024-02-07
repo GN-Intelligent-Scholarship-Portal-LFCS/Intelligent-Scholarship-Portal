@@ -3,8 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./Home/Home";
 import { StudentRegistrationGuidelines, OrganizationRegistrationGuidelines } from "./Pages/NewRegistrationPage";
 import AadharStudentRegistration from "./Pages/AadharStudentRegistrationPage";
-import OrgLogin from "./Forms/OrgLoginForm";
-import OrgScholarshipForm from "./Pages/OrgScholarshipForm";
+import OrgLogin from "./Pages/OrgLoginPage";
+import OrgScholarship from "./Pages/OrgScholarshipPage";
 import StudentRegistration from "./Pages/StudentRegistrationPage";
 import OrgRegistration from "./Pages/OrgRegistrationPage";
 import StudentLogin from "./Pages/StudentLoginPage";
@@ -21,7 +21,7 @@ function App() {
             <Route path="/registration-organization" element={<OrganizationRegistrationGuidelines />} />  //Path to Guidelines Page for Organisations
             <Route path="/organization-registration" element={<OrgRegistration />} />  //Path to TAN Registration for Organisations
             <Route path="/organisation-login/:tanNumber" element={<OrgLogin />} />  //Path to Login Page for Organisations
-            <Route path="/fill-scheme-details/:tanNumber" element={<OrgScholarshipForm />} />   //Path to fill scholarship form for Organisations
+            <Route path="/fill-scheme-details/:tanNumber" element={<OrgScholarship />} />   //Path to fill scholarship form for Organisations
         </Routes>
     );
 }

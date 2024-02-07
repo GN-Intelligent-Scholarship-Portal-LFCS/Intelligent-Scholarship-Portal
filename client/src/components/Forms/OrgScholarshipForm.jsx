@@ -1,11 +1,19 @@
 import React from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import "./FormStyle.css";
 
 const OrgScholarshipForm = () => {
 
     const navigate = useNavigate();
     const { tanNumber } = useParams();
+    const [selectedFile, setSelectedFile] = useState(null);
+
+    const handleFileChange = (event) => {
+        const file = event.target.files[0];
+        setSelectedFile(file);
+    };
 
     const [formData, setFormData] = React.useState({
         schemeName: "",
@@ -30,6 +38,13 @@ const OrgScholarshipForm = () => {
         e.preventDefault();
         console.log(formData);
 
+        if (selectedFile) {
+            // Here you can handle the file submission, such as uploading it to a server
+            console.log("Selected file:", selectedFile);
+        } else {
+            alert("Please select a file.");
+        }
+        
         try {
             const response = await axios.post(`http://localhost:5000/scholarship/api/fill-scholarship-form/${tanNumber}`, formData);
             console.log(response.data);
@@ -46,15 +61,16 @@ const OrgScholarshipForm = () => {
             endDate: "",
             amount: "",
             guidelines: ""
-        })
+        });
+
+        navigate(`/`);
     }
 
     return (
 
         <div className="bg-gray-100 h-full flex items-center justify-center p-10">
             <div className="bg-white p-8 rounded shadow-md max-w-md w-full">
-                <h2 className="text-2xl font-bold mb-4 text-center">Enter Your Scholarship Details</h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form className="space-y-4">
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="schemeName">
                             Scheme Name:
@@ -111,22 +127,19 @@ const OrgScholarshipForm = () => {
                     </div>
                     <div className="mb-4">
                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="guidelines">
-                            Guidelines (insert a pdf for throrough guide):
+                            Guidelines (insert a pdf for guide):
                         </label>
                         <input
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                            id="guidelines"
-                            type="text"
-                            name="guidelines"
-                            value={formData.guidelines}
-                            onChange={handleInputChange}
-                            placeholder="guidelines"
+                        type="file"
+                        id="fileInput"
+                        accept=".pdf"
+                        onChange={handleFileChange}
                         />
                     </div>
                     <div className="flex items-center justify-center">
                         <button
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                            type='submit'
+                            onClick={handleSubmit}
                         >
                             Upload Your Scholarship Scheme
                         </button>

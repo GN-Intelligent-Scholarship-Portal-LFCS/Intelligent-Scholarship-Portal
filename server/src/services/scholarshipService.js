@@ -12,11 +12,11 @@ const registerOrganisation = async (req, res) => {
 
         if (tanVerificationResult.rows.length === 0) {
             const responseData = {
-                success: error,
-                message: "Invalid TAN number",
+                success: "error",
+                message: "TAN number not registered or invalid!",
                 redirectUrl: "/register-organisation"
             }
-            return res.status(404).json(responseData);
+            return res.status(200).json(responseData);
         }
         else {
             //Extracting TAN details from incometax table:
@@ -55,6 +55,34 @@ const registerOrganisation = async (req, res) => {
     }
 }
 
+//Function for only TAN verification:
+
+const verifyTANNumber = async (req,res) => {
+    try {
+        const { tanNumber } = req.body;
+        console.log(tanNumber);
+        //Checking if organisation is already registered or not: 
+        const existingTan = await db.query(`SELECT * FROM organisations WHERE tan_no=${tanNumber}`);
+
+        if (existingTan.rows.length === 0) {
+            const responseData = {
+                success: false,
+                message: "TAN number verification failed.",
+            };
+            res.status(200).json(responseData);       
+        } else {
+            const responseData = {
+                success: true,
+                message: "TAN number verification successful!",
+            }
+            res.status(200).json(responseData);
+        }
+    } catch (error) {
+        console.error("Error logging in for organisation:", error);
+        res.status(500).json({ error: "Internal server error." });
+    }
+}
+
 
 //Function to login for organisation and fill scholarship form and register it into the scholarships table:
 const fillScholarshipForm = async (req, res) => {
@@ -86,4 +114,4 @@ const fillScholarshipForm = async (req, res) => {
     }
 }
 
-export { fillScholarshipForm, registerOrganisation};
+export { fillScholarshipForm, registerOrganisation, verifyTANNumber};
