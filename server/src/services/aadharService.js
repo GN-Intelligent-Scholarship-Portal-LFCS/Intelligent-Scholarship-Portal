@@ -32,21 +32,28 @@ const verifyAadhar = async (req, res) => {
         const { aadharNumber } = req.body;
         console.log('Aadhar Number:', aadharNumber);
 
-        const aadharVerificationResult = await db.query(`SELECT * FROM aadhar_details WHERE aadhar_no=${aadharNumber}`);
+        const aadharVerificationResult = await db.query(`SELECT * FROM aadhar_details WHERE aadhar_no=${aadharNumber}`); //Checking if aadhar exists in the UIDAI database.
 
         if (aadharVerificationResult.rows.length === 0) {
             return res.status(404).json({
-                status : "success", 
+                status : "failure", 
                 message: "Aadhar number not verified." });
         } else {
-            return res.status(200).json({ 
-                status : "failure",
-                message: "Aadhar verified successfully!" });
+            const existingAadharResult = await db.query(`SELECT * FROM students WHERE aadhar_no=${aadharNumber}`); //Checking if aadhar is already registered to ISP.
+            if (existingAadharResult.rows.length === 0){
+                return res.status(200).json({ 
+                    status : "success",
+                    message: "Aadhar verified successfully!" });
+            } else {
+                return res.status(200).json({
+                    status : "success",
+                    message: "Aadhar already registered!" });
+                }
         }
-    } catch (error) {
-        console.error("Error verifying aadhar: ", error);
-        res.status(500).json({ error: "Internal server error." });
-    }
+        } catch (error) {
+            console.error("Error verifying aadhar: ", error);
+            res.status(500).json({ error: "Internal server error." });
+        }
 }
 
 export { verifyAadhar, fetchAadharDetails };

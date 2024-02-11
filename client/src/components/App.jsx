@@ -8,6 +8,7 @@ import OrgScholarship from "./Pages/OrgScholarshipPage";
 import StudentRegistration from "./Pages/StudentRegistrationPage";
 import OrgRegistration from "./Pages/OrgRegistrationPage";
 import StudentLogin from "./Pages/StudentLoginPage";
+import StudentScheme from "./Pages/StudentSchemePage";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
             <Route path="/student-registration" element={<AadharStudentRegistration />} />  //Aadhar Registration Page
             <Route path="/student-registration-form/:aadharNumber" element={<StudentRegistration />} /> //Student Registration Page
             <Route path="/student-login/:aadharNumber" element={<StudentLogin />} /> //Path to Login for Students
+            <Route path="/student-scholarship-form" element={<StudentScheme />} /> //Path to Students filling Scholarship Forms Page.
             <Route path="/registration-organization" element={<OrganizationRegistrationGuidelines />} />  //Path to Guidelines Page for Organisations
             <Route path="/organization-registration" element={<OrgRegistration />} />  //Path to TAN Registration for Organisations
             <Route path="/organisation-login/:tanNumber" element={<OrgLogin />} />  //Path to Login Page for Organisations

@@ -10,16 +10,17 @@ const registerStudent = async (req, res) => {
         console.log(educationDetails);
 
         const { aadharNumber, instName, degree, startDate, graduationDate, currentYear } = educationDetails;
-
-        
-        const query = `
+        const query1 = `
             INSERT INTO students (aadhar_no, institute_name, degree, start_date, graduation_date, current_year)
-            VALUES ($1,$2,$3,$4,$5,$6);`;
+            VALUES ($1,$2,$3,$4,$5,$6)`;
+        const values1 = [aadharNumber,instName,degree,startDate,graduationDate,currentYear];
+        const result1 = await db.query(query1, values1);
+        console.log(result1.rows);
 
-        const values = [aadharNumber,instName,degree,startDate,graduationDate,currentYear];
-
-        const result = await db.query(query, values);
-        console.log(result.rows);
+        const query2 = `INSERT INTO institutes (name,aadhar_no) VALUES ($1,$2)`;
+        const values2 = [instName,aadharNumber];
+        const result2 = await db.query(query2,values2);
+        console.log(result2.rows);
 
         res.status(201).json({ message: "Student registered successfully." }); 
     } catch (error) {
@@ -35,16 +36,16 @@ const loginStudent = async (req,res) => {
         const { aadharNumber } = req.body;
         console.log(`Aadhar number trying to login : ${aadharNumber}`);
 
-        const result = db.query(`SELECT * FROM students WHERE aadhar_no=${aadharNumber}`);
+        const result = await db.query(`SELECT * FROM students WHERE aadhar_no=${aadharNumber}`);
         console.log(result.rows);
 
         if (result.rows.length === 0) {
-            res.status(404).json({
-                status : "success",
+            res.status(200).json({
+                status : "failure",
                 message: "Aadhar not registered."});
         } else {
             res.status(200).json({ 
-                status: "failure",
+                status: "success",
                 message: "Aadhar verified successfully."});
         }
     } catch(error) {

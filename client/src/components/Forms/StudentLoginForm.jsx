@@ -69,7 +69,7 @@ const StudentLoginForm = () => {
   
         try {
           console.log('Aadhar Number:', aadharNumber);
-          navigate(`/student-registration-form/${aadharNumber}`);
+          navigate(`/student-scholarship-form`);
       } catch (error) {
           console.error('Error logging in:', error);
       }
@@ -97,7 +97,7 @@ const StudentLoginForm = () => {
   
                         {verificationMessage && <p>{verificationMessage}</p>}
 
-                        {verificationMessage.includes("successfully") && (
+                        {verificationMessage.includes("success") && (
                             <div>
                               <label>
                                 Mobile Number:
@@ -107,7 +107,7 @@ const StudentLoginForm = () => {
                             </div>
                         )}
 
-                        {verificationMessage.includes("successfully") && (
+                        {verificationMessage.includes("success") && (
                                   <div>
                                     <label>
                                       Enter OTP:
@@ -120,8 +120,8 @@ const StudentLoginForm = () => {
                                     <button onClick={handleVerifyOtp}>Verify OTP</button>
                                   </div>
                         )}
-                        {message && <p className={message.includes('successfully') ? "text-green-500" : "text-red-500"}> {message}</p>}
-                        {message && message.includes("successfully") && (
+                        {message && <p className={message.includes('success') ? "text-green-500" : "text-red-500"}> {message}</p>}
+                        {message && message.includes("success") && (
                             <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mt-2' onClick={handleLogin}>
                                 Login 
                             </button>
