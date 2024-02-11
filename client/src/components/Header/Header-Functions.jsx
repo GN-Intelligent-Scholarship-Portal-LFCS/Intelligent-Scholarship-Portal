@@ -45,7 +45,7 @@ function Announcement() {
   return (
     <div className="container-fluid">
       <div className="row announcement-box">
-        <div className="col-sm-12 text-center border border-warning animation-slideLeft">
+        <div className="col-sm-12 text-center border-warning animation-slideLeft">
           <span className="p-2 d-block">
             Please check the Announcement corner regularly for the latest updates and information. <br />
             For any technical queries, please contact Helpdesk at

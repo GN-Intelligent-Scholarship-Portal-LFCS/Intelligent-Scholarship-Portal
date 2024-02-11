@@ -30,29 +30,6 @@ function Footer() {
 
           {/* Logos */}
           <div className="row justify-content-around">
-            {logos.map((logo, index) => (
-              <div key={index} className="col-xl-2 col-lg-2 col-md-3 col-sm-4">
-                <a href={logo.link} >
-                  <img
-                    src={logo.src}
-                    alt={logo.alt}
-                    className="img-fluid mx-auto d-flex mb-3"
-                    style={{ height: "50px" }}
-                  />
-                </a>
-              </div>
-            ))}
-
-            {/* Google Play Logo */}
-            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 text-center">
-              <a href="https://play.google.com/store/apps/details?id=in.gov.scholarships" >
-                <img
-                  src={googlePlay}
-                  className="img-fluid mx-auto"
-                  alt="Google Play Logo"
-                />
-              </a>
-            </div>
           </div>
         </div>
       </div>

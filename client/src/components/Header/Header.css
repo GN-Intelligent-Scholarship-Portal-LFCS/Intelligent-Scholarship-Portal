@@ -3,6 +3,40 @@
     color: #fff;
 }
 
+header {
+    background-color: #054688;
+}
+
+header span {
+    color: white;
+    margin-left: 15px;
+}
+
+.logo {
+    border-radius: 50%;
+    margin-left: 80px;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav a {
+    margin-right: 200px;
+}
+
+.nav button {
+    background-color: #045cff;
+    color: white;
+}
+
+.nav button:hover {
+    background-color: #fff;
+    color: #054688;
+}
+
 .container {
     display: flex;
     justify-content: space-between;

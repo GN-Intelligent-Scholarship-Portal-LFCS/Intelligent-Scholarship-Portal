@@ -10,17 +10,12 @@ const registerStudent = async (req, res) => {
         console.log(educationDetails);
 
         const { aadharNumber, instName, degree, startDate, graduationDate, currentYear } = educationDetails;
-        const query1 = `
+        const query = `
             INSERT INTO students (aadhar_no, institute_name, degree, start_date, graduation_date, current_year)
             VALUES ($1,$2,$3,$4,$5,$6)`;
-        const values1 = [aadharNumber,instName,degree,startDate,graduationDate,currentYear];
-        const result1 = await db.query(query1, values1);
-        console.log(result1.rows);
-
-        const query2 = `INSERT INTO institutes (name,aadhar_no) VALUES ($1,$2)`;
-        const values2 = [instName,aadharNumber];
-        const result2 = await db.query(query2,values2);
-        console.log(result2.rows);
+        const values = [aadharNumber,instName,degree,startDate,graduationDate,currentYear];
+        const result = await db.query(query, values);
+        console.log(result.rows);
 
         res.status(201).json({ message: "Student registered successfully." }); 
     } catch (error) {
